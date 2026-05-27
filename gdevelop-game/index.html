@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My JSON Game</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My JSON Game</h1>
+  <p id="status">Loading game data…</p>
+
+  <script>
+    // Load your JSON file (place it in the same folder or /data/)
+    fetch("data/game.json")
+      .then(response => response.json())
+      .then(gameData => {
+        document.getElementById("status").textContent = "Game Loaded!";
+        console.log("Game Data:", gameData);
+
+        // Example: show something from the JSON
+        if (gameData.title) {
+          document.body.insertAdjacentHTML("beforeend",
+            `<h2>${gameData.title}</h2>`
+          );
+        }
+
+        // TODO: Your game logic goes here
+      })
+      .catch(err => {
+        document.getElementById("status").textContent = "Error loading JSON!";
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
